@@ -28,4 +28,8 @@
     while문과 indexOf, substring를 이용하여 index기반으로 자르고 비교하는 방식
     while((pos= str.indexOf(' '))!= -1)
     String tmp = str.substring(0,pos); 
+### 1-4 단어 뒤집기
+    n개의 단어를 입력받고 뒤집어서 출력
+    StringBuilder의 reverse를 이용하면 쉽게 가능하지만
+    while(lt <rt) 를 이용하여 하면 제약이 걸린 상황에서도 문제없음
 </details>
