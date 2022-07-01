@@ -46,4 +46,9 @@
     첫번째로 맨 앞과 맨뒤를 length/2번 비교하는 방식으로 확인가능하고
     두번째로 StringBuilder의 reverse로 문자열을 뒤집은뒤
     str.equalsIgnoreCase로 대소문자 구분없이 두 문자열을 비교하여 판별하는 방식이 있다.
+### 1-8 유효한 팰린드롬
+    회문을 팰린드롬이라고 한다. 알파벳만 가지고 검사하며 대소문자 구분하지않습니다.
+    Character.isAlphabetic()로 알파벳 유무 판별해서 알파벳 뽑아낸뒤 1-7방식을 쓰려했는데
+    강의에선 replaceAll 매소드에 정규표현식을 사용해서 알파벳을 제외한 문자들을 제거했다.
+    str = str.toUpperCase().replaceAll("[^A-Z]","");
 </details>
