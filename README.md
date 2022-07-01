@@ -41,4 +41,9 @@
     문자열에서 먼저나온 문자의 중복이 나올경우 제거하는 문제
     (str.indexOf(str.charAt(i))==i 를 이용하는게 가장 핵심
     현 index와 현 알파벳이 최초로 발견된 index가 같을때 answer에 추가하는 방식
+### 1-7 회문 문자열
+    거꾸로 읽어도 같은 문자열을 회문 문자열이라 명하고 대소문자를 구분하지않는다.
+    첫번째로 맨 앞과 맨뒤를 length/2번 비교하는 방식으로 확인가능하고
+    두번째로 StringBuilder의 reverse로 문자열을 뒤집은뒤
+    str.equalsIgnoreCase로 대소문자 구분없이 두 문자열을 비교하여 판별하는 방식이 있다.
 </details>
