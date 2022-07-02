@@ -51,4 +51,10 @@
     Character.isAlphabetic()로 알파벳 유무 판별해서 알파벳 뽑아낸뒤 1-7방식을 쓰려했는데
     강의에선 replaceAll 매소드에 정규표현식을 사용해서 알파벳을 제외한 문자들을 제거했다.
     str = str.toUpperCase().replaceAll("[^A-Z]","");
+### 1-9 숫자만 추출
+    문자열 속에서 숫자만 추출하여 순서대로 자연수 생성
+    x>=48 && x<= 57 일때 a = a*10 +(x-48) 로 아스키 번호 활용한 방법1
+    Character.isDigit(x)으로 숫자판별해서 누적하는 방법2
+    Integer.parseInt로 string을 int로 변환해주자
+    나는 str = str.replaceAll("[^0-9]",""); replaceAll의 정규식을 활용했음
 </details>
