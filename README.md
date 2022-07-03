@@ -89,3 +89,10 @@
     바꿔진 십진수를 char로 casting해줘서 대문자 알파벳으로 표시한다.
     substring(7)로 계속 잘라주는것도 잊지말자
 </details>
+<details>
+<summary>02 Array</summary>
+
+### 2-1 큰 수 출력하기
+    n개의 정수를 입력받아 바로 앞수 보다 큰수만 출력, 단 첫번째는 무조건출력
+    ArrayList<Integer>에 정수들을 add해서 담는데 앞 인덱스와 비교해서 클때만 담자
+</details>
