@@ -163,3 +163,12 @@
     멘토가 등수가 더 크면 false를 반환하여 멘토자격X
     되면 true를 반환한뒤 n*n쌍를 1로만든다.
 </details>
+
+<details>
+<summary>03 Two pointers, Sliding window</summary>
+
+### 3-1 두 배열 합치기
+    오름차순으로 정렬된 두 배열을 오름차순으로 다시 하나의 배열로 합치기
+    두개의 cnt 값을 설정하고 while문을 통해 루프하면서 add 해준다.
+    for문 만 생각했었는데 while문 쓰는거 까먹지말자
+</details>
