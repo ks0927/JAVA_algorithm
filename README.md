@@ -203,3 +203,14 @@
     다시 0으로 돌리면서 cnt를 줄여준다.rt-lt+1로 길이를 구하고 
     answer보다 커질때 answer를 초기화해준다.
 </details>
+<details>
+<summary>04 HashMap, TreeSet</summary>
+
+### 4-1 학급 회장
+    후보중 가장 많이 선택된 후보를 출력
+    배열로 받아서 그냥 갯수 세려했는데 해쉬를 써봐야될것같아서
+    HashMap을 사용해서 풀어봄. containsKey로 있는거면 그냥 value값을 +1해주고
+    없는거면 새로운 후보니까 put해줌, 최대값은 key를 순회하며 초기화하는 방식으로함
+    강사는 map.put(x,getOrDefault(x,0)+1)을 사용해서 좀더 간편하게 map세팅을함
+    size로 key갯수를 알수있다. remove로 제거가능. keySet으로 순회하는거 중요
+</details>
