@@ -213,4 +213,11 @@
     없는거면 새로운 후보니까 put해줌, 최대값은 key를 순회하며 초기화하는 방식으로함
     강사는 map.put(x,getOrDefault(x,0)+1)을 사용해서 좀더 간편하게 map세팅을함
     size로 key갯수를 알수있다. remove로 제거가능. keySet으로 순회하는거 중요
+### 4-2 아나그램
+    anagram은 알파벳의 나열순서는 다르지만 그 구성이 일치할 경우를 의미한다.
+    ex) apple  ppela
+    입력받은 두 문자열이 아나그램인지 YES NO로 판별한다.(대소문자 구분)
+    난 HashMap을 사용하여 풀었다. getOrDefault로 처음 문자열을 받고
+    그 다음 문자열을 받을때 getOrDefault로 같은게 있으면 value값을 -1하는 방식
+    그리고 value를 돌면서 0이 아닌값이 있으면 아나그램이 아니라고 생각한다.
 </details>
