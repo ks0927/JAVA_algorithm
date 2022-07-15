@@ -234,4 +234,14 @@
     lt와 rt로 sliding window를 돌면서 확인
     isEqual메소드를 만들어서 두map이 같은지 확인했다.
     나는 isEqual를 따로 만들었는데 map.equals()로 간편하게 확인가능함...
+### 4-5 k번쨰 큰 수
+    1~100 사이 숫자 n장을 가지고있는데 미리 뽑아둠
+    이 n장에서 3번 뽑아서(중복허용X) 더한 값 중 k번째로 큰값찾기, 없으면 -1 return
+    삼중 for문으로 하면 시간초과 나려나? 했는데 n이 최대100이라 n^3의 상황에서도 1000ms안쪽
+    삼중 for문으로 경우 다 구하고 HashSet에 집어넣어서 중복은 다 제거함
+    ArrayList에 넣고 sort하는데 Collections.sort(answer,Collections.reverseOrder());
+    내림차순으로 정렬함
+    answer.size()가 k-1보다 클때 answer.get(k-1)로 값 리턴해주고 작으면 -1리턴
+    강사는 TreeSet을 이용해서 set의 중복제거와 자동으로 정렬되게 했다.
+    TreeSet에는 first 와 last 메소드가 있는데 각각 맨앞 맨뒤 값을 가져온다.
 </details>
