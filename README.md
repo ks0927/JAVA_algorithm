@@ -243,5 +243,18 @@
     내림차순으로 정렬함
     answer.size()가 k-1보다 클때 answer.get(k-1)로 값 리턴해주고 작으면 -1리턴
     강사는 TreeSet을 이용해서 set의 중복제거와 자동으로 정렬되게 했다.
+    TreeSet<Integer> Tset = new TreeSet<>(Collections.reverseOrder));
     TreeSet에는 first 와 last 메소드가 있는데 각각 맨앞 맨뒤 값을 가져온다.
 </details>
+<details>
+<summary>05 Stack,Queue</summary>
+
+### 5-1 올바른 괄호
+    괄호가 올바르게 입력되면YES 아니면 NO
+    Stack을 이용해서 (가 입력되면 스택에 집어넣고 아니면 즉 )면pop하는데
+    Stack 내부에 아무것도 없을때 pop하려하면 바로 false를 리턴한다.
+    stack.pop()
+    stack.add()
+    stack.empty()
+</details>
+
