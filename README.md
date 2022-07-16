@@ -255,6 +255,13 @@
     Stack 내부에 아무것도 없을때 pop하려하면 바로 false를 리턴한다.
     stack.pop()
     stack.add()
+    stack.push()
     stack.empty()
+### 5-2 괄호문자제거
+    입력된 문자열중 소괄호 사이에 있는 모든 문자 제거 후 남은 문자 출력
+    제대로 입력했다는 가정이 전제인듯?
+    stack에 push하는데 만약 ')'면 peek로 스택맨위 검사하면서 (일때까지 다 pop해버리는 방식으로 품
+    강사도 같은 방식인데 나는 peek로 확인하고 pop했는데 강사는 그냥 바로 pop해버림
+    if(x==')') while(stack.pop()!='(') 이렇게 넘어감. 간편한듯?
 </details>
 
