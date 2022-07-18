@@ -282,5 +282,16 @@
     //stack.push(Integer.parseInt(String.valueOf(x)));
     //stack.push(Character.getNumericValue(x));
     //stack.push(x-48);
+### 5-5 쇠막대기
+    괄호로 이루어진 문자열에서 () 경우만 레이저이고 나머지는 (로시작해서 )로 끝나는 막대기
+    레이저로 잘린 총 막대기의 조각수를 구해라
+    처음에 보고 이게뭐지 싶었던 문제 고심끝에 생각한 방법은
+    일단 ()인 경우를 L로 만든다음 순회하면서 L일때는 스택에 쌓인 size만큼 더해주고
+    )일때는 막대기의 끝이니까 1를 더해준뒤 pop해준다.
+    근데 ()를 L로 만드는걸 순회하면서 하려했더니 index에러가 났다.
+    그래서 그냥 String의 replace 메소드를 사용해서 바꾸니 편하고 좋았다.
+    String replaceStr = str.replace("()","L");
+    강사와 생각하는건 비슷했는데 강사는 str를 i로 순회하면서 i-1값을 통해 막대기인지 레이저인지
+    판단하는 방식을 사용했다.
 </details>
 
