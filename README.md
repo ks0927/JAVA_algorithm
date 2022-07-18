@@ -293,5 +293,16 @@
     String replaceStr = str.replace("()","L");
     강사와 생각하는건 비슷했는데 강사는 str를 i로 순회하면서 i-1값을 통해 막대기인지 레이저인지
     판단하는 방식을 사용했다.
+### 5-6 공주 구하기
+    n명의 사람중 k번째 때마다 사람을 뺀다. 마지막으로 남은 사람 return
+    queue를 이용해서 구현했다. 큐의 size가 1이 되기전까지 돌면서
+    cnt 값이k일때마다 remove하고 아니면 poll로 제거한뒤 다시 queue로 넣는다.
+    Queue<Integer> queue =new LinkedList<>(); 자바에서 큐는 linkedlist로 생성해야한다.
+    queue.offer() add와같은기능
+    queue.add()
+    queue.poll() 맨앞에걸뽑고(제거하고) 반환함
+    queue.remove() 제거
+    queue.size()
+    
 </details>
 
