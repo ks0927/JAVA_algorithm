@@ -274,5 +274,13 @@
     exception이 발생하기 때문에 empty()할때는 그냥 바로 push해주고pick0.
     알아둘점은 k에 move의 칸-1이 들어간다는 점
     강사도 비슷한 방식인듯 다만 push하고 pop하는 조건문세울때 좀더 깔끔한듯하다<- &&같은 조건을 나는 자꾸 잊는듯...
+### 5-4 후위식 연산(postfix)
+    후위연산자를 연산한 결과 출력,후위식연산? ex)3*(5+2)-9 -> 352+*9- 이런식으로 변경
+    스택을 이용해서 숫자면 push 연산자가 나오면 pop() 두번해서 해당연산자에 맞는 연산하게 한뒤
+    그 결과값을 다시 push하는 형식으로 구현했다.
+    여기서 char로 숫자를 받아오는데 이걸 int로 바꾸는 방법은 다양하니 알아두자
+    //stack.push(Integer.parseInt(String.valueOf(x)));
+    //stack.push(Character.getNumericValue(x));
+    //stack.push(x-48);
 </details>
 
