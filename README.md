@@ -485,4 +485,33 @@
 			}
 		}
 	}
+### 7-13 경로탐색(인접리스트)
+    7-12때와 같은 경로 탐색이지만 이차원배열로 행렬을 만드는게 아닌 인접리스트를 사용한 방법
+    인접리스트를 사용하면 노드수가 많아져도 부담이 덜하다. 갈수있는 곳만 가니까?
+    ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>(); //인접리스트 생성방식
+    	
+    public void DFS(int v){         //방식 자체는 이전과 같다. 다만 인접리스트의 사용과 초기화을 알아두자
+		if(v==n) answer++;
+		else{
+			for(int nv : graph.get(v)){
+				if(ch[nv]==0){
+					ch[nv]=1;
+					DFS(nv);
+					ch[nv]=0;
+				}
+			}
+		}
+	}
+
+    //초기화 방법
+    for(int i=0; i<=n; i++){
+        graph.add(new ArrayList<Integer>());
+    }
+    ch=new int[n+1];
+    for(int i=0; i<m; i++){
+        int a=kb.nextInt();
+        int b=kb.nextInt();
+        graph.get(a).add(b);
+    }
+
 </details>
