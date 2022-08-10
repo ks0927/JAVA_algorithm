@@ -518,3 +518,27 @@
     기존 BFS와 다른점은 7-13에서 배웠던 인접리스트를 활용했다는점. 그리고 이전 값에 +1해가는 방식이라는점이다.
     물론 기존의 행렬로 구하면서 레벨값을 거리로 하는 방법이 좀더 친숙하긴하나 이 방법도 기억해두자.
 </details>
+<details>
+<summary>08 DFS, BFS</summary>
+
+### 8-1 합이 같은 부분집합
+    n개의 원소로 이루어진 자연수 집합에서 두개의 부분집합으로 나누었을때 두 부분집합의 합이 서로같은 경우 YES반환.
+    이전 모든 부분집합을 구하던 코드에서 영감을 받아서 코드 작성.
+    check로 내가 현재 간 값을 true false로 표기한다.
+    이전과 같이 현재 원소를 넣는 경우 안넣는 경우 2개의 상황을 통해 모든 경우의 수를 구하는 것이 목표.
+    다만 두 부분집합을 비교하는게 좀 까다로웠는데
+    int subset1 =0;   //check가 true인 값
+    int subset2 =0;  //check가 false인 값
+        for (int i = 0; i < n; i++) {
+            if(check[i])
+                subset1+=arr[i];
+            else
+                subset2+=arr[i];
+            }
+    if(subset1==subset2){
+        result =true;
+    }
+    subset1과 2를 check를 통해 구분하여 구하고 비교하는 방식을 채용했다.
+    강사의 방식은 전체 합에서 지금 subset의 합을 빼서 subset과 같은지 비교해서 찾았는데 크게 와닿진...
+    subset의 합이 전체의 1/2보다 클때는 return;해서 성능을 향상 시킬수있을것같다.
+</details>
