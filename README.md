@@ -661,4 +661,30 @@
     그렇게 시간 기준으로 내림차순 정렬후 입장일때 +1 퇴장일때 -1하는 방식. 다만 퇴장시간은 정확히 그시간엔 없기때문에
     퇴장시간이 입장 시간보다 빠르게 정렬되야한다. 따라서 퇴장을0 입장을 1로해서 내림차순 배열을 했다.
     이게 그리디 인지는 잘모르겠지만...
+### 9-5 다익스트라
+    가중치 방향 그래프에서 1번 정점부터 모든 정점으로의 최소 거리비용을 출력해라. 
+    인접리스트와 큐를 활용하여 풀었다. 자세한 내용은 코드 참조
+    Arrays.fill(shortPath,Integer.MAX_VALUE);를 통해 편하게 초기화 가능
+    다만 강사의 방식은 우선순위 큐를 이용해서 가장 짧은 거리의 값을 먼저뽑는 방식이다.
+    이렇게 하면 확실히 좀 경우를 줄이...겠지? 내 방식이 틀린건가? 시간차이가 많이 나려나? 모르겠다...
+    그래도 강사 방식을 알아두자 이게 정석 다익스트라 방식인듯하다.
+
+    public void solution(int v){
+		PriorityQueue<Edge> pQ = new PriorityQueue<>();
+		pQ.offer(new Edge(v, 0));
+		dis[v]=0;
+		while(!pQ.isEmpty()){
+			Edge tmp=pQ.poll();
+			int now=tmp.vex;
+			int nowCost=tmp.cost;
+			if(nowCost>dis[now]) continue;
+			for(Edge ob : graph.get(now)){
+				if(dis[ob.vex]>nowCost+ob.cost){
+					dis[ob.vex]=nowCost+ob.cost;
+					pQ.offer(new Edge(ob.vex, nowCost+ob.cost));
+				}
+			}
+		}
+	}
+
 </details>
