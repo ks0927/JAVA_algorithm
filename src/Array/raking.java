@@ -7,6 +7,7 @@ public class raking {
         int[] answer = new int[arr.length];
         int cnt = 1;
         int tmp;
+        //점수들을 돌면서 나보다 높은 점수가 있으면 등수를 + 해서 낮추는 방식
         for(int i=0; i< arr.length ; i++){
             tmp =arr[i];
             for(int j = 0; j< arr.length; j++){
