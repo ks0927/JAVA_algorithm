@@ -2,7 +2,7 @@ package TwoPointers;
 
 import java.util.Scanner;
 
-public class continousNumber {
+public class continuousNumber {
     public int solution(int n){
         int[] arr = new int[n];
         for(int i=0; i<n; i++)
@@ -27,13 +27,12 @@ public class continousNumber {
                 cnt2=cnt1;
             }
         }
-
-        return answer-1;
+        return answer-1; //1개로 구성된 합은 제외
 
     }
 
     public static void main(String[] args){
-        continousNumber C = new continousNumber();
+        continuousNumber C = new continuousNumber();
         Scanner kb = new Scanner(System.in);
 
         int n  = kb.nextInt();
