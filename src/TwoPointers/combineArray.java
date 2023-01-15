@@ -8,6 +8,7 @@ public class combineArray {
         ArrayList<Integer> answer = new ArrayList<>();
         int cnt1=0 , cnt2 =0;
 
+        //포인터 두개로 하나씩 넣는다
         while(cnt1<n1  && cnt2<n2){
             if(arr1[cnt1]< arr2[cnt2]){
                 answer.add(arr1[cnt1]);
@@ -18,10 +19,12 @@ public class combineArray {
                 cnt2++;
             }
         }
+        //남은거 있으면 집어넣기
         while(cnt1<n1) {
             answer.add(arr1[cnt1]);
             cnt1++;
         }
+        //남은거 있으면 집어넣기
         while(cnt2<n2) {
             answer.add(arr2[cnt2]);
             cnt2++;
