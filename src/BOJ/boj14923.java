@@ -58,7 +58,7 @@ public class boj14923 {
 
 
                             queue.add(new Node(next_x,next_y,now.useWand+1));
-                            visited[next_x][next_y][now.useWand+1]=true;
+                            visited[next_x][next_y][now.useWand+1]=true;     //미리 갔다고 찍어놔야지 중복의 문제를 해결하고 성능최적화가 가능하다
 
                         }
                     }
@@ -72,7 +72,7 @@ public class boj14923 {
                             }
 
                             queue.add(new Node(next_x,next_y,now.useWand));
-                            visited[next_x][next_y][now.useWand]=true;
+                            visited[next_x][next_y][now.useWand]=true;    //미리 갔다고 찍어놔야지 중복의 문제를 해결하고 성능최적화가 가능하다
                         }
                     }
 
