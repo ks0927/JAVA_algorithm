@@ -32,6 +32,9 @@ public class boj2644 {
 
                 for (int i = 1; i <= n; i++) {
                     if(map[poll][i] ==1 && !visited[poll][i]){
+//                        System.out.println("i = " + i);
+//                        System.out.println("result = " + result);
+                        if(i ==s2) return result;
                         queue.add(i);
                         visited[poll][i] =true;
                     }
