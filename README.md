@@ -789,7 +789,13 @@
     그리고 배열을 복사할때 map[i]=Arrays.copyOf(temp,maxColumnSize);
     Arrays.copyOf로 원하는 길이만큼 가져오는 메서드 있다는걸 잊지말았으면 좋겠다.
     그리고 Map을 통해 키와 값 쌍으로 저장할수있다는걸 생각해두면 편리할듯.
-    
+
+### boj 1260번
+    https://www.acmicpc.net/problem/1260
+    dfs와 bfs를 둘다 쓰는 그래프 탐색
+    그래프를 탐색하면서 방문된 점을 순서대로 출력하면된다.
+    간단한 dfs와 bfs문제다.
+    다만 속도가 좀 느린데 고민해봐야겠다.
     
 
 </details>
