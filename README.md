@@ -764,5 +764,32 @@
     인접 리스트로 그래프를 구현한뒤 visited 배열로 확인한다.
     dfs로 vistied가 0인(아직 연결되어나 확인이 안된경우) 경우 나와 연결된 모든 정점을 찾는다.
 
+### boj 17140번
+    https://www.acmicpc.net/problem/17140
+    시뮬레이션 문제
+    주어진 조건을 잘보고 정확하게 구현하자.
+    int[][] 이차원 배열의 크기를 계속 바꿔줘야하는게 포인트다.
+    R연산일때는 int[i] 를 계속 갈아끼는 방식으로 만들어봤고
+    C연산일때는 최대 크기가 int[100][100]인걸 생각해서 미리 해당 temp 이차원배열을 만들고
+    모든 계산을 temp에 한뒤 적절한 크기로 다시 map를 new해서 만든다음 temp에 있는 값을 map에 옮기는 방식
+
+    쓰면서 까먹지 말았으면 하는기능은 정렬할때 Collections.sort(rowList); 방식을쓰면 간단하게 정렬할수있는데
+    Comparable를 implements하고 compareTo를 오버라이드 해서 정렬 조건을 정해주자
+
+        @Override
+        public int compareTo(Point o) {       //this - o 면 오름차순 , o-this면 내림차순인듯하다
+            if(this.count == o.count) {
+                return this.num - o.num;
+            }
+            else {
+                return this.count - o.count;
+            }
+        }
+    이건 까먹지 말았으면 좋겠다.
+    그리고 배열을 복사할때 map[i]=Arrays.copyOf(temp,maxColumnSize);
+    Arrays.copyOf로 원하는 길이만큼 가져오는 메서드 있다는걸 잊지말았으면 좋겠다.
+    그리고 Map을 통해 키와 값 쌍으로 저장할수있다는걸 생각해두면 편리할듯.
+    
+    
 
 </details>
