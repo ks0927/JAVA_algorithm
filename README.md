@@ -834,7 +834,14 @@
                     map[indexR][indexC]= distribute; //분배값을 다시 맵에 적용한다
                 }
             }
-
+### boj 10552번
+    https://www.acmicpc.net/problem/10552
+    dfs를 이용한 간단한 탐색
+    사실dfs라기 보단 구현문제에 가까운데 시간초과가 계속 났었다.
+    불필요한 for문 때문이었던것같은데 그냥 일차원배열만 사용하고
+    인덱스를 통한 찾기 방법으로 시간복잡도를 줄였다.
+    https://velog.io/@cchloe2311/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%B0%B1%EC%A4%80-10552.-DOM
+    해당 블로그의 내용참조
 
 
 
