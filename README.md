@@ -796,6 +796,46 @@
     그래프를 탐색하면서 방문된 점을 순서대로 출력하면된다.
     간단한 dfs와 bfs문제다.
     다만 속도가 좀 느린데 고민해봐야겠다.
-    
+
+### boj 16234번
+    https://www.acmicpc.net/problem/16234
+    dfs로 탐색해서 연합을 구하고 연합끼리 인구수 분배하는 시뮬레이션 문제
+    이전 섬문제처럼 dfs로 나의 섬(연합)을 구하는건 생각하기 쉬운데 그렇게 만들어진
+    연합맵(visited배열)을 통해 나의 연합의 인덱스와 값을 저장했다가 map을 초기화하는것이 관건
+    MAP<>을 통해 해당 부분을 해결했다. 역시 MAP<>은 숫자를 키값으로두고 등장횟수나,인덱스 같은걸 밸류로 놓을때 좋은것같다.
+            Map<Integer, ArrayList<int[]>> intIndexMap = new HashMap<>();
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    int intValue = visited[i][j];
+                    int[] index = {i,j};
+
+                    if (!intIndexMap.containsKey(intValue)) { //기존에 존재하던 연합이 아니면
+                        intIndexMap.put(intValue, new ArrayList<>());  //만들어주고
+                    }
+                    intIndexMap.get(intValue).add(index);  //인덱스 값도 넣어준다.
+                }
+            }
+
+            for (Integer integer : intIndexMap.keySet()) { //키값들을 순회한다.
+                ArrayList<int[]> indexList = intIndexMap.get(integer); //같은 키값인 인덱스를 불러온뒤
+                int unionSum =0;
+                int unionSize = indexList.size();
+
+                for (int[] ints : indexList) { //인덱스를 돌며 인구를 구한다
+                    int indexR = ints[0]; // r좌표
+                    int indexC = ints[1]; // c좌표
+                    unionSum+=map[indexR][indexC]; //구한 인구값을 연합 총합에 더해주고
+                }
+                int distribute = unionSum / unionSize; //최종적으로 연합 총합과 연합 국가들을 나눠서 분배값을 찾는다.
+
+                for (int[] ints : indexList) {
+                    int indexR = ints[0]; // r좌표
+                    int indexC = ints[1]; // c좌표
+                    map[indexR][indexC]= distribute; //분배값을 다시 맵에 적용한다
+                }
+            }
+
+
+
 
 </details>
