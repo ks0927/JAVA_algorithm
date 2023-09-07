@@ -853,5 +853,45 @@
     일정한 조건을 만족하지 못할시 순회를 종료한다.
     다르게 말하면 순회 즉 for문을 문제없이 한바퀴 돌았다는것은 갈수있다는것.
 
+### boj 2178번
+    https://www.acmicpc.net/problem/2178
+    미로의 최단거리를 구하는 문제
+    최단거리는 뭐다?BFS
+    BFS를 할때는 레벨당 +1 하는거 위치를 잘 넣어야한다. 다른곳에 넣었다가 숫자값이 이상해짐 조심하자.
+
+    static void BFS(int r, int c){
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(new Node(r,c));
+        visited[r][c] = true;
+
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            ++result;  //항상 result의 위치를 생각하자 이거때문에 숫자값난리났음
+            for (int i = 0; i < size; i++) {
+                Node poll = queue.poll();
+                for (int j = 0; j < 4; j++) { //위 아래 왼쪽 오른쪽 탐색
+                    int next_r = poll.r + direction[j][0];
+                    int next_c = poll.c + direction[j][1];
+
+                    //map 내부 값 처리
+                    if (!(0 <= next_r && next_r < N && 0 <= next_c && next_c < M)) {
+                        continue;
+                    }
+
+                    if(next_r == N-1 && next_c == M-1)
+                        return ;
+
+                    if(map[next_r][next_c] == 1 && !visited[next_r][next_c]){
+                        visited[next_r][next_c] = true;
+                        route[next_r][next_c] = result;
+                        queue.add(new Node(next_r,next_c));
+                    }
+
+                }
+            }
+        }
+    }
+
 
 </details>
