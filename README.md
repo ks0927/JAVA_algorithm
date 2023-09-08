@@ -893,5 +893,38 @@
         }
     }
 
+### boj 11403번
+    https://www.acmicpc.net/problem/14890
+    방향 그래프 dfs문제
+    정점 즉 노드를 기준으로 dfs를 하는게 포인트이고 방향그래프여서 양방향과는 다르다.
+    한 노드 i 를 dfs를 하면서 visited 배열에 갈수있는 노드를 기록한다.
+    dfs가 끝나면 visited 배열에 노드 i가 갈수있는 노드가 찍혀있기때문에 그걸로 다시 맵 초기화
+
+        //노드 기준으로 dfs
+        for (int i = 0; i < N; i++) {
+            visited = new int[N];
+            DFS(i);
+            for(int j=0;j<N;j++){
+                if(visited[j]==1)
+                    resultMap[i][j]=1;
+            }
+        }
+
+    static void DFS(int node){
+
+        for (int i = 0; i < N; i++) {
+
+            if(visited[i] != 0)
+                continue;
+
+            if(map[node][i] == 1 && visited[i] == 0){
+                visited[i] = 1;
+                DFS(i);
+            }
+        }
+    }
+
+
+
 
 </details>
