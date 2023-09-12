@@ -952,5 +952,36 @@
     그리디 or dp 문제인듯하다
     그리디로 풀었다. 가장큰 단위인 5를 최대한 많이 사용하려함.
 
+### boj 11559번
+    https://www.acmicpc.net/problem/11559
+    뿌요뿌요 테트리스 문제
+    구현+시뮬레이션+dfs 문제인듯하다.
+    조건에 맞게 구현하는건 항상어렵다;
+    countDfs로 현재 이어진 같은색들 갯수를 체크하고
+    4개 이상이어서 터질때는 boomCheckDfs로 터뜨린다.
+    이번에는 중력으로인해 아래로 내려오는 로직을 구현하는데 우여곡절이 많았음
+    결국 column을 돌면서 .이 아닌값을 ArrayList에 넣고 한컬럼씩 값을 재초기화하는 방식으로 구현함
+
+        for (int i = 0; i < 6; i++) {
+            mapColumn = new ArrayList<>();
+            // .을 제외한 값을 담는다
+            for (int j =11; j >= 0; j--) {
+                if(!(map[j][i].equals("."))){
+                    mapColumn.add(map[j][i]);
+                }
+            }
+            //현재 칼럼을 .으로 초기화한다.
+            for (int j = 0; j < 12; j++) {
+                map[j][i] =".";
+            }
+
+
+            int index =11;
+            for (int j = 0; j < mapColumn.size(); j++) {
+                map[index][i] = mapColumn.get(j);
+                index--;
+            }
+        }
+
 
 </details>
