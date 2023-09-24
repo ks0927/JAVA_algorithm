@@ -1121,4 +1121,32 @@
     다시 말하면 이전에 13164번 문제에서 팀을 만드는 것과 같은 것이다.
     형식을 다르게했을뿐인데 갈피를 못잡은거 보면 창의력이 아직부족한듯;;
 
+### boj 1541번
+    https://www.acmicpc.net/problem/1541
+    +,-,숫자로만 이루어진 하나의 식에 괄호를 널어서 최소로 만들어야한다.
+    생각해본결과 최소가 되려면 -가 나왔을때 빼지는 값이 커져야한다.
+    즉 - 이후의 모든 값을 괄호를 쳐서 -가 나오기전까지 더한다음 빼는게 가장 작을것.
+    예를 들어 55-50+40+20-30+10-30 식이 있다고 생각하면
+    55-(50+40+20)-(30+10)-(30) 이게 최소가 되는값이다.
+    이걸 코드에서는 -가 나온이후부턴 모든 숫자를 빼는 방식으로 구현했다. 코드를 실행하면
+    55-50-40-20-30-10-30 이런식의 흐름이 될것.
+
+    사실상 문자열 파싱하는데 시간이 더 걸렸다.
+
+        //한줄을 가져오고 해당 줄을 - 기준으로 String을 나눈다. true를 해서 - 도 넣는다.
+        StringTokenizer st1 = new StringTokenizer(bf.readLine(), "-", true);
+
+        //문자열들을 담을 큐
+        Queue<String> queue = new LinkedList<>();
+
+        //- 기준으로 나눠진 string을 돌면서 다시 + 기준으로 나눠서 숫자와 문자 모두 담는다.
+        while (st1.hasMoreTokens()){
+
+            StringTokenizer st2 = new StringTokenizer(st1.nextToken(), "+", true);
+            while (st2.hasMoreTokens()){
+                queue.add(st2.nextToken());
+            }
+        }
+
+    
 </details>
