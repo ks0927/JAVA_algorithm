@@ -1168,4 +1168,39 @@
     BBRBRBBRB
     B뭉텅이는 4개,R 뭉텅이는 3개이므로 B를 한번에 통으로 칠하고 나머지 R을 3번칠하는 4번이 가장 적은 방법
 
+### boj 1863번
+    https://www.acmicpc.net/problem/1863
+    스카이 라인을 통해 최소 건물의 갯수를 구해보자.
+    y값을 스택에 넣고빼는 문제인데 자세히 살펴보자.
+    y값을 스택을 비교하는 경우는 3가지가있다. 
+    1.y값이 현재 스택의 peek보다 작을때 
+    2.y값이 현재 스택의 peek보다 같을때
+    3.y값이 현재 스택의 peek보다 클때
+    
+    같을때는 그냥 continue하면되고, 클때는 y값을 넣어주면되는데 문제는 작을때가 조금 복잡하다.
+    스택의 peek보다 작다면 현 스택에 들어있는 값들중 y보다 큰값을 모두 제거해야한다. 
+    왜냐면 y보다 큰값이 남아있다가 나중에 다시 스택에 들어오게되어도 같은 건물로 판단할수없다. 중간에 아래로 빈공간이 생길테니까.
+    해당 과정을 향상된 for문으로 진행하면 ConcurrentModificationException가 뜨는데
+    for문으로 반복자가 컬렉션을 순회할때 pop등의 메소드로 컬렉션이 수정되는등의 순회의 문제가 발생할 것을 방지하기위해서나온다.
+    Java 8 이상을 사용하는 경우 Iterator를 사용하여 순회하고 iterator.remove()를 호출하여 컬렉션을 안전하게 수정할 수 있다.
+
+                Iterator<Integer> iterator = stack.iterator();
+                while (iterator.hasNext()) {
+                    Integer integer = iterator.next();
+                    if (y < integer) {
+                        iterator.remove(); // for문대신 Iterator로 순회
+                    }
+                }
+    그리고 stack.search(y)== -1 를 통해 현스택에 y와 같은 값이 없는 경우에 스택에 넣어준다.
+    예제는 내가 만든 값을 통해 진행했다.
+    7
+    1 3
+    2 5
+    5 2
+    6 1
+    8 4
+    10 3
+    12 2
+    답 : 7
+
 </details>
