@@ -35,12 +35,12 @@ public class boj4811 {
             }
 
         }
-        for (int i = 0; i < 31; i++) {
+/*        for (int i = 0; i < 31; i++) {
             for (int j = 0; j < 31; j++) {
                 System.out.print(dp[i][j]+" ");
             }
             System.out.println();
-        }
+        }*/
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         while (true){
