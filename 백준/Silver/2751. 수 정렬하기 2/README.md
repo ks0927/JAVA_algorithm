@@ -26,3 +26,9 @@
 
  <p>첫째 줄부터 N개의 줄에 오름차순으로 정렬한 결과를 한 줄에 하나씩 출력한다.</p>
 
+### 참고
+Arrays.sort()는 시간복잡도가 평균 n*log(n))이지만 최악일때 n^2이 나온다.
+따라서 Collection.sort()를 사용해야함. 
+Collections.sort() 를 쓰는 방법이다. Collections.sort() 은 Timsort이다.
+시간복잡도 O(n) ~ O(nlogn) 을 보장한다.
+잘 정리한 블로그 https://st-lab.tistory.com/106
