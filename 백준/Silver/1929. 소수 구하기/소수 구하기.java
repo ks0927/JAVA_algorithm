@@ -6,7 +6,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         int start = Integer.parseInt(st.nextToken());
         int end = Integer.parseInt(st.nextToken());
 
@@ -14,9 +16,10 @@ public class Main {
         setUpPrimes(end+1);
         for (int i = start; i <= end; i++) {
             if (!primes[i]) {
-                System.out.println(i);
+                sb.append(i).append('\n');
             }
         }
+        System.out.println(sb);
     }
 
     public static void setUpPrimes(int max) {
