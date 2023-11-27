@@ -33,3 +33,9 @@
 
  <p>조건에 따라 정렬하여 단어들을 출력한다.</p>
 
+### 참고
+정렬할때 Comparable 과 Comparator 의 차이를 알면 좋을듯?
+
+https://st-lab.tistory.com/243  참고
+
+compareTo 구현하는법 잊지말자
