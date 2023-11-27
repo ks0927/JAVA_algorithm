@@ -10,12 +10,9 @@ public class Main{
         int N = Integer.parseInt(st.nextToken());
 
         arr = new int[1_000_001];
-
+        
         for (int i = 1; i < 1_000_001; i++) {
             arr[i]=(splitInt(i));
-        }
-
-        for (int i = 0; i < 1_000_001; i++) {
             if(arr[i] == N){
                 System.out.println(i);
                 return;
