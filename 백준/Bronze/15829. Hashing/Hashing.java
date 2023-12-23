@@ -12,7 +12,7 @@ public class Main {
         String readLine = br.readLine();
         int[] ints = readLine.chars().map(x -> x - 96).toArray();
 
-        int sum = 0;
+        Long sum = 0L;
         for (int i = 0; i < ints.length; i++) {
             sum+= ints[i] * calculate(i);
             sum%= 1234567891;
@@ -20,12 +20,12 @@ public class Main {
         System.out.println(sum);
     }
 
-    private static int calculate(int target) {
+    private static Long calculate(int target) {
         if(target == 0) {
-            return 1;
+            return 1L;
         }
 
-        int result = 1;
+        Long result = 1L;
 
         for (int i = 0; i < target; i++) {
             result*=31;
