@@ -1,0 +1,7 @@
+SELECT MEMBER_ID, MEMBER_NAME, GENDER, date_format(date_of_birth, '%Y-%m-%d') AS DATE_OF_BIRTH
+
+FROM MEMBER_PROFILE
+
+WHERE GENDER = 'W' and TLNO is not null and DATE_OF_BIRTH like '%-03-%'
+
+ORDER BY MEMBER_ID ASC;
