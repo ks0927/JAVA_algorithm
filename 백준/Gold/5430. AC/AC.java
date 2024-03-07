@@ -59,6 +59,8 @@ public class Main {
 
             }
         }
+        // StringBuilder 대신 String으로 한뒤 += 연산자로 했더니 시간 초과가 났었다.
+        // StringBuilder의 append는 O(1) 이지만 , String의 + 같은 concat은 O(N + K) 이므로 잦은 변경이있다면 StringBuilder를 쓰자
         StringBuilder result = new StringBuilder("[");
 
         int size = deque.size();
