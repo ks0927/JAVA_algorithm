@@ -6,7 +6,6 @@ public class Main {
     static int[] directionY = {0, 0, -1, 1};
     static boolean[][] visited;
     static String[][] campus;
-    static int count = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,16 +35,16 @@ public class Main {
 
         visited[y][x] = true;
 
-        DFS(x, y, M, N);
+        int dfs = DFS(x, y, 0, M, N);
 
-        if(count == 0) {
+        if (dfs == 0) {
             System.out.println("TT");
             return;
         }
-        System.out.println(count);
+        System.out.println(dfs);
     }
 
-    static void DFS(int x, int y, int M, int N) {
+    static int DFS(int x, int y, int count, int M, int N) {
 
         for (int i = 0; i < 4; i++) {
             int nextX = x + directionX[i];
@@ -56,9 +55,10 @@ public class Main {
                 if (campus[nextY][nextX].equals("P")) {
                     count++;
                 }
-                DFS(nextX, nextY, M, N);
+                count = DFS(nextX, nextY,count, M, N);
             }
         }
+        return count;
     }
 
 
