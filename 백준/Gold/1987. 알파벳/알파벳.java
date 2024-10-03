@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
     static int ans = 1;
-    static ArrayList<Character> check = new ArrayList<>();
+    static boolean[] visited = new boolean[26];
     static char[][] map;
     static int[] directionR = {-1, 1, 0, 0};
     static int[] directionC = {0, 0, -1, 1};
@@ -27,16 +27,16 @@ public class Main {
             }
         }
 
-        check.add(map[0][0]);
-        DFS(0, 0);
+        visited[map[0][0] - 'A'] = true;
+        DFS(0, 0, 1);
 
         System.out.println(ans);
     }
 
 
-    static void DFS(int r, int c) {
-        if (check.size() > ans)
-            ans = check.size();
+    static void DFS(int r, int c, int len) {
+        if (len > ans)
+            ans = len;
 
         for (int i = 0; i < 4; i++) {
             int nextR = r + directionR[i];
@@ -46,10 +46,10 @@ public class Main {
                 continue;
 
             char nextValue = map[nextR][nextC];
-            if (!check.contains(nextValue)) {
-                check.add(nextValue);
-                DFS(nextR, nextC);
-                check.remove(check.size() - 1);
+            if (!visited[nextValue - 'A']) {
+                visited[nextValue - 'A'] = true;
+                DFS(nextR, nextC, len + 1);
+                visited[nextValue - 'A'] = false;
             }
         }
 
