@@ -2,42 +2,53 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int[] map;
-    static boolean[] visited;
-    static StringBuilder sb = new StringBuilder();
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static int[] p;
+	static int[] select;
+	static boolean[] visited;
+	static int M;
+	static int N;
+	static StringBuilder sb = new StringBuilder();
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+	public static void main(String[] args) throws Exception {
 
-        map = new int[M];
-        visited = new boolean[N + 1];
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-        DFS(N, M, 0);
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 
-        System.out.println(sb);
-    }
+		p = new int[N];
+		select = new int[M];
+		visited = new boolean[N];
+		
+		for (int i = 0; i < N; i++) {
+			p[i] = i+1;
+		}
 
-    public static void DFS(int N, int M, int depth) {
-        if (depth == M) {
-            for (int value : map) {
-                sb.append(value).append(" ");
-            }
-            sb.append("\n");
-            return;
-        }
+		perm(0);
+		System.out.println(sb);
 
-        for (int i = 1; i <= N; i++) {
-            if (!visited[i]) {
-                visited[i] = true;
-                map[depth] = i;
-                DFS(N, M, depth + 1);
-                visited[i] = false;
-            }
-        }
+	}
 
-    }
+	public static void perm(int depth) {
+		if (depth == M) {
+			for (int i = 0; i < M; i++) {
+				sb.append(select[i]).append(" ");
+			}
+			sb.append("\n");
+
+			return;
+		}
+
+		for (int i = 0; i < N; i++) {
+			if(visited[i]) continue;
+			
+			visited[i] = true;
+			select[depth] = p[i];
+			perm(depth + 1);
+			visited[i] = false;
+			select[depth] = 0;
+		}
+	}
 }
