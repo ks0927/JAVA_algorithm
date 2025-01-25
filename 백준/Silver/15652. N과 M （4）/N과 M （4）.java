@@ -3,38 +3,52 @@ import java.util.*;
 
 public class Main {
 
-    static int[] lines;
-    static StringBuilder sb = new StringBuilder();
+	static int[] p;
+	static int[] select;
+	static boolean[] visited;
+	static int M;
+	static int N;
+	static StringBuilder sb = new StringBuilder();
 
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+	public static void main(String[] args) throws Exception {
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-        lines = new int[M];
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 
-        DFS(N, M, 0, 1);
+		p = new int[N];
+		select = new int[M];
+		visited = new boolean[N];
+		
+		for (int i = 0; i < N; i++) {
+			p[i] = i+1;
+		}
 
-        System.out.println(sb);
-    }
+		combi(0,0);
+		System.out.println(sb);
 
-    static void DFS(int N, int M, int depth, int at) {
-        if (depth == M) {
-            for (int i = 0; i < M; i++) {
-                sb.append(lines[i]).append(" ");
-            }
-            sb.append("\n");
-            return;
-        }
+	}
 
-        for (int i = at; i <= N; i++) {
-            lines[depth] = i;
-            DFS(N, M, depth + 1, i);
-        }
+	public static void combi(int depth,int start) {
+		if (depth == M) {
+			for (int i = 0; i < M; i++) {
+				sb.append(select[i]).append(" ");
+			}
+			sb.append("\n");
 
+			return;
+		}
 
-    }
-
+		for (int i = start; i < N; i++) {
+//			if(visited[i]) continue;
+			
+			visited[i] = true;
+			select[depth] = p[i];
+			combi(depth + 1,i);  //중복조합은 i+1이아니라 i로만 고치면된다
+			visited[i] = false;
+			select[depth] = 0;
+		}
+	}
 }
