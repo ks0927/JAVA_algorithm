@@ -2,42 +2,49 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int[] map;
-    static boolean[] visited;
-    static StringBuilder sb = new StringBuilder();
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static int[] p;
+	static int[] select;
+	static int M;
+	static int N;
+	static StringBuilder sb = new StringBuilder();
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+	public static void main(String[] args) throws Exception {
 
-        map = new int[M];
-        visited = new boolean[N + 1];
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-        DFS(N, M, 0, 1);
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 
-        System.out.println(sb);
-    }
+		p = new int[N];
+		select = new int[M];
+		
+		for (int i = 0; i < N; i++) {
+			p[i] = i+1;
+		}
 
-    public static void DFS(int N, int M, int depth, int index) {
-        if (depth == M) {
-            for (int value : map) {
-                sb.append(value).append(" ");
-            }
-            sb.append("\n");
-            return;
-        }
+		combi(0,0);
+		System.out.println(sb);
 
-        for (int i = index; i <= N; i++) {
-            if (!visited[i]) {
-                visited[i] = true;
-                map[depth] = i;
-                DFS(N, M, depth + 1, i + 1);
-                visited[i] = false;
-            }
-        }
+	}
 
-    }
+	public static void combi(int depth,int start) {
+		if (depth == M) {
+			for (int i = 0; i < M; i++) {
+				sb.append(select[i]).append(" ");
+			}
+			sb.append("\n");
+
+			return;
+		}
+
+		for (int i = start; i < N; i++) {
+//			if(visited[i]) continue;
+			
+			select[depth] = p[i];
+			combi(depth + 1,i + 1);
+			select[depth] = 0;
+		}
+	}
 }
