@@ -2,58 +2,63 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    static int[] lines;
+    static int N;
+    static int M;
     static int[] map;
+    static int[] pick;
     static boolean[] visited;
-    static StringBuilder sb = new StringBuilder();
+    static StringBuilder sb;
 
-    public static void main(String[] args) throws NumberFormatException, IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
         map = new int[N];
+        pick = new int[M];
         visited = new boolean[N];
-        lines = new int[M];
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            map[i] = Integer.parseInt(st.nextToken());
+            int value = Integer.parseInt(st.nextToken());
+            map[i] = value;
         }
+
+        sb = new StringBuilder();
         Arrays.sort(map);
 
-        DFS(N, M, 0);
+        perm(0);
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
-    static void DFS(int N, int M, int depth) {
+    public static void perm(int depth) {
         if (depth == M) {
-            for (int i = 0; i < M; i++) {
-                sb.append(lines[i]).append(" ");
+            for (int value : pick) {
+                sb.append(value).append(" ");
             }
             sb.append("\n");
             return;
         }
-        int before = 0;
 
+        // before가 중복을 피하는 핵심
+        int before = 0;
         for (int i = 0; i < N; i++) {
             if (!visited[i]) {
 
                 if (before != map[i]) {
                     visited[i] = true;
-                    lines[depth] = map[i];
                     before = map[i];
-                    DFS(N, M, depth + 1);
+                    pick[depth] = map[i];
+                    perm(depth + 1);
                     visited[i] = false;
+                    pick[depth] = 0;
                 }
+
             }
-
         }
+
     }
-
-
 }
