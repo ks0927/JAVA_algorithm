@@ -19,7 +19,7 @@ public class Main {
             for (int j = 0; j < N; j++) {
                 sb.append("* ");
             }
-            sb.deleteCharAt(sb.length() - 1); //마지막 " "공백 하나 지우기용 
+//            sb.deleteCharAt(sb.length() - 1); //마지막 " "공백 하나 지우기용 
 
             sb.append("\n");
         }
