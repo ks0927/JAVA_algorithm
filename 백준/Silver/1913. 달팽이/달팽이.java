@@ -23,7 +23,6 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
 
         arr = new int[N][N];
-        arr[0][0] = N * N;
         fill();
 
         StringBuilder sb = new StringBuilder();
@@ -43,30 +42,30 @@ public class Main {
         int r = 0;
         int c = 0;
         int num = N * N;
-        int turn = 0;
+        int turn = 0; // 방향을 위한 변수. 0하 1우 2상 3좌
 
-        while (num > 1) {
+        while (num > 0) {
+            arr[r][c] = num;
 
             if (num == M) {
                 R = r + 1;
                 C = c + 1;
             }
+            num--;
 
-            if (!(r + dr[turn] >= 0 && r + dr[turn] < N && c + dc[turn] >= 0 && c + dc[turn] < N && arr[r + dr[turn]][c + dc[turn]] == 0)) {
-                turn++;
-                turn %= 4;
+            //방향전환
+            int nr = r + dr[turn];
+            int nc = c + dc[turn];
+            if (!(nr >= 0 && nr < N && nc >= 0 && nc < N && arr[nr][nc] == 0)) { //만약 현재 turn 방향으로 갈수없다면(이미갔다면)
+                turn = (turn + 1) % 4;  //방향을 꺾는다.
+                nr = r + dr[turn];   //꺾인 다음방향으로 nr과 nc를 재초기화
+                nc = c + dc[turn];
             }
 
-            r += dr[turn];
-            c += dc[turn];
-            num--;
-            arr[r][c] = num;
+            r = nr;
+            c = nc;
+        }
 
-        }
-        if(num == 1 && M == 1) {
-            R = r + 1;
-            C = c + 1;
-        }
     }
 
 }
