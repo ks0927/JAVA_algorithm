@@ -1,103 +1,77 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-    static class Node{
-        int r;
-        int c;
 
-        public Node(int r, int c) {
-            this.r = r;
-            this.c = c;
-        }
-    }
+	static int N, M;
+	static int[][] map;
+	static int[][] visited;
+	static int[] dr = { -1, 0, 1, 0 };
+	static int[] dc = { 0, 1, 0, -1 };
 
-    static int N;
-    static int M;
-    static int result;
-    static int[][] map;
-    static int[][] route;
-    static boolean[][] visited;
-    static int[][] direction = {{-1,0},{1,0},{0,-1},{0,1}};
-    public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 
-        map = new int[N][M];
-        route = new int[N][M];
+		map = new int[N][M];
+		visited = new int[N][M];
 
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            String s = st.nextToken(); //숫자가 다 붙어있기때문에 string에서 하나씩 뽑는과정이 필요함
+		for (int i = 0; i < N; i++) {
+			String str = br.readLine();
 
-            for (int j = 0; j < s.length(); j++) {
-                int a = Integer.parseInt(String.valueOf(s.charAt(j))); //chatAt으로 하나씩 가져오는데 parseInt는 String이 필요해서 다시String으로 변환해줌
-                map[i][j] = a;
-            }
-        }
+			for (int j = 0; j < M; j++) {
+				int value = str.charAt(j) - '0';
+				map[i][j] = value;
+			}
+		}
 
-/*        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                System.out.print(map[i][j]);
-            }
-            System.out.println();
-        }*/
+//		for (int i = 0; i < N; i++) {
+//			for (int j = 0; j < M; j++) {
+//				System.out.print(map[i][j]);
+//			}
+//			System.out.println();
+//		}
 
-        visited = new boolean[N][M];
-        result = 1;
-        BFS(0, 0);
+		BFS();
 
-        System.out.println(result);
+		System.out.println(visited[N - 1][M - 1]);
+	}
 
-    }
+	public static void BFS() {
+		Queue<int[]> que = new LinkedList<>();
+		que.offer(new int[] { 0, 0 });
+		visited[0][0] = 1;
 
-    static void BFS(int r, int c){
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(new Node(r,c));
-        visited[r][c] = true;
+		while (!que.isEmpty()) {
+			int[] cur = que.poll();
+			int r = cur[0];
+			int c = cur[1];
 
-        while (!queue.isEmpty()) {
+			if (r == N - 1 && c == M - 1) {
+				return;
+			}
 
-            int size = queue.size();
-            ++result;  //항상 result의 위치를 생각하자 이거때문에 숫자값난리났음
-            for (int i = 0; i < size; i++) {
-                Node poll = queue.poll();
-                for (int j = 0; j < 4; j++) { //위 아래 왼쪽 오른쪽 탐색
-                    int next_r = poll.r + direction[j][0];
-                    int next_c = poll.c + direction[j][1];
+			for (int d = 0; d < 4; d++) {
+				int nr = r + dr[d];
+				int nc = c + dc[d];
 
-                    //map 내부 값 처리
-                    if (!(0 <= next_r && next_r < N && 0 <= next_c && next_c < M)) {
-                        continue;
-                    }
+				if (!check(nr, nc))
+					continue;
 
-                    if(next_r == N-1 && next_c == M-1)
-                        return ;
+				if (map[nr][nc] == 1 && visited[nr][nc] == 0) {
+					que.offer(new int[] { nr, nc });
+					visited[nr][nc] = visited[r][c] + 1;
 
-                    if(map[next_r][next_c] == 1 && !visited[next_r][next_c]){
-                        visited[next_r][next_c] = true;
-                        route[next_r][next_c] = result;
-                        queue.add(new Node(next_r,next_c));
-                    }
+				}
+			}
+		}
+	}
 
-                }
-            }
-
-/*            System.out.println("루트표시");
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < M; j++) {
-                    System.out.print(route[i][j]);
-                }
-                System.out.println();
-            }*/
-        }
-    }
+	private static boolean check(int r, int c) {
+		return r >= 0 && r < N && c >= 0 && c < M;
+	}
 }
