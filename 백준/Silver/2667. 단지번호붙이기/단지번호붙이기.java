@@ -3,92 +3,84 @@ import java.io.*;
 
 public class Main {
 
-    static int[][] map;
-    static int[][] visited;
-    static List<Integer> building;
-    static int[][] direction = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 위 아래 왼쪽 오른쪽
+	static int N;
+	static int[][] map;
+	static int[] dr = { -1, 0, 1, 0 };
+	static int[] dc = { 0, 1, 0, -1 };
+	static List<Integer> people;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+	public static void main(String[] args) throws Exception {
 
-        int N = Integer.parseInt(br.readLine());
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        map = new int[N][N];
-        visited = new int[N][N];
-        building = new ArrayList<>();
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
 
-        //초기화
-        for (int i = 0; i < N; i++) {
-            String readLine = br.readLine();
-            for (int j = 0; j < N; j++) {
-                int value = Character.getNumericValue(readLine.charAt(j));
-                map[i][j] = value;
-            }
-        }
+		map = new int[N][N];
+		people = new ArrayList<>();
 
-        int dan = 1;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (map[i][j] == 1 && visited[i][j] == 0) {
-                    bfs(i, j, N , dan);
-                    dan++;
-                }
-            }
-        }
+		for (int i = 0; i < N; i++) {
+			String str = br.readLine();
 
-        sb.append(dan-1).append("\n");
-        Collections.sort(building);
+			for (int j = 0; j < N; j++) {
+				int value = str.charAt(j) - '0';
+				map[i][j] = value;
+			}
+		}
 
-        for (Integer integer : building) {
-            sb.append(integer).append("\n");
+		int cnt = 1;
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (map[i][j] == 1) {
+					cnt++;
+					BFS(i, j, cnt);
+				}
+			}
+		}
 
-        }
+//		for (int i = 0; i < N; i++) {
+//			for (int j = 0; j < N; j++) {
+//				System.out.print(map[i][j]);
+//			}
+//			System.out.println();
+//		}
+		System.out.println(cnt - 1);
+		Collections.sort(people);
+		for (Integer person : people) {
+			System.out.println(person);
+		}
+	}
 
-        System.out.println(sb);
-    }
+	public static void BFS(int cr, int cc, int g) {
 
-    private static void bfs(int i, int j, int N , int dan) {
-        Queue<Point> queue = new LinkedList<>();
-        queue.add(new Point(i, j));
-        visited[i][j] = dan;
+		int human = 1;
+		Queue<int[]> que = new LinkedList<>();
+		que.offer(new int[] { cr, cc });
+		map[cr][cc] = g;
 
-        int people = 1;
+		while (!que.isEmpty()) {
+			int[] cur = que.poll();
+			int r = cur[0];
+			int c = cur[1];
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int k = 0; k < size; k++) {
-                Point poll = queue.poll();
-                for (int l = 0; l < 4; l++) { //위 아래 왼쪽 오른쪽 탐색
-                    int nexti = poll.i + direction[l][0];
-                    int nextj = poll.j + direction[l][1];
+			for (int d = 0; d < 4; d++) {
+				int nr = r + dr[d];
+				int nc = c + dc[d];
 
-                    //탐색할 위치의 범위가 올바르고
-                    if (0 <= nexti && nexti < N && 0 <= nextj && nextj < N) {
+				if (!check(nr, nc))
+					continue;
 
-                        // 맵에서 1이며 아직 탐색한적 없는 곳이면
-                        if(map[nexti][nextj] == 1 && visited[nexti][nextj] == 0) {
-                            //탐색 배열 초기화해주고
-                            visited[nexti][nextj] = dan;
-                            //큐에 넣어서 그 위치부터 다시 탐색
-                            queue.add(new Point(nexti,nextj));
-                        }
-                    }
-                }
-            }
-            people += queue.size();
-        }
+				if (map[nr][nc] == 1) {
+					que.offer(new int[] { nr, nc });
+					map[nr][nc] = g;
+					human++;
+				}
+			}
+		}
+		people.add(human);
+	}
 
-        building.add(people);
-    }
-
-    static class Point {
-        int i;
-        int j;
-
-        public Point(int i, int j) {
-            this.i = i;
-            this.j = j;
-        }
-    }
+	private static boolean check(int r, int c) {
+		return r >= 0 && r < N && c >= 0 && c < N;
+	}
 }
