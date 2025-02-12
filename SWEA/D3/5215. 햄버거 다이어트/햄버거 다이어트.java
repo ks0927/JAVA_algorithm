@@ -1,57 +1,56 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Solution {
 
-    static int scoreMax;
+	static int[] score;
+	static int[] cal;
+	static int maxScore;
+	static int maxCal;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int T = Integer.parseInt(br.readLine());
-        for (int i = 0; i < T; i++) {
+		int T = Integer.parseInt(br.readLine());
 
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
-            int L = Integer.parseInt(st.nextToken());
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < T; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
 
-            int[] scores = new int[N];
-            int[] cals = new int[N];
-            for (int j = 0; j < N; j++) {
-                st = new StringTokenizer(br.readLine());
-                int score = Integer.parseInt(st.nextToken());
-                int cal = Integer.parseInt(st.nextToken());
-                scores[j] = score;
-                cals[j] = cal;
-            }
-            scoreMax = 0;
-            backTracking(scores, cals, L, 0, 0, 0);
+			int N = Integer.parseInt(st.nextToken());
+			int limit = Integer.parseInt(st.nextToken());
 
-            sb.append("#").append(i + 1).append(" ").append(scoreMax).append("\n");
-        }
-        System.out.print(sb);
+			score = new int[N];
+			cal = new int[N];
+			maxScore = 0;
+			maxCal = 0;
+			for (int j = 0; j < N; j++) {
+				st = new StringTokenizer(br.readLine());
 
-    }
+				int s = Integer.parseInt(st.nextToken());
+				int c = Integer.parseInt(st.nextToken());
+				score[j] = s;
+				cal[j] = c;
+			}
 
-    static void backTracking(int[] scores, int[] cals, int L, int start, int scoreSum, int calSum) {
+			subset(0, N, limit, 0, 0);
+			sb.append("#").append(i + 1).append(" ").append(maxScore).append("\n");
 
-        if (calSum <= L) {
-            scoreMax = Math.max(scoreSum, scoreMax);
-        } else {
-            return;
-        }
+		}
 
-        for (int i = start; i < scores.length; i++) {
-            scoreSum += scores[i];
-            calSum += cals[i];
+		System.out.print(sb);
+	}
 
-            backTracking(scores, cals, L, i + 1, scoreSum, calSum);
+	public static void subset(int depth, int N, int limit, int calSum, int scoreSum) {
+		if (calSum > limit)
+			return;
 
-            scoreSum -= scores[i];
-            calSum -= cals[i];
-        }
-    }
+		if (depth == N && calSum <= limit) {
+			maxScore = Math.max(maxScore, scoreSum);
+			return;
+		}
 
-
+		subset(depth + 1, N, limit, calSum + cal[depth], scoreSum + score[depth]);
+		subset(depth + 1, N, limit, calSum, scoreSum);
+	}
 }
