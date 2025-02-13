@@ -1,39 +1,43 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Iterator;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+	static int[] score;
+	static int[] dp;
 
-        int N = Integer.parseInt(br.readLine());
+	public static void main(String[] args) throws Exception {
 
-        int[] stairs = new int[N + 1];
-        int[] memo = new int[N + 1];
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (int i = 1; i <= N; i++) {
-            int parseInt = Integer.parseInt(br.readLine());
-            stairs[i] = parseInt;
-        }
+		int N = Integer.parseInt(br.readLine());
 
-        if(N == 1){
-            System.out.println(stairs[1]);
-            return;
-        }
-        if(N == 2){
-            System.out.println(stairs[1]+stairs[2]);
-            return;
-        }
-        
-        memo[1] = stairs[1];
-        memo[2] = stairs[1] + stairs[2];
-        for (int i = 3; i <= N; i++) {
-            int value = Math.max(memo[i - 2], memo[i - 3] + stairs[i - 1]) + stairs[i];
-            memo[i] = value;
-        }
+		score = new int[N];
+		for (int i = 0; i < N; i++) {
+			score[i] = Integer.parseInt(br.readLine());
+		}
+		
+		if(N==1) {
+			System.out.println(score[0]);
+			return;
+		}
+		if(N==2) {
+			System.out.println(score[0] + score[1]);
+			return;
+		}
+		
+		dp = new int[N];
+		dp[0] = score[0];
+		dp[1] = score[0] + score[1];
+		dp[2] = Math.max(dp[0]+score[2], score[1]+ score[2]);
 
-        System.out.println(memo[N]);
-    }
+		for (int i = 3; i < N; i++) {
+			dp[i] = Math.max(dp[i - 2], dp[i - 3] + score[i - 1]) + score[i];
+		}
+		
+		System.out.println(dp[N-1]);
+	}
 
 }
