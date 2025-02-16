@@ -2,90 +2,101 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static String result;
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int T = Integer.parseInt(st.nextToken());
-
-        // 노드들을 알파벳 A B ... 순서로 담아놓는 배열
-        Node[] tree = new Node[26];
-        for (int i = 0; i < T; i++) {
-            st = new StringTokenizer(br.readLine());
-            char current = st.nextToken().charAt(0);
-            char leftChild = st.nextToken().charAt(0);
-            char rightChild = st.nextToken().charAt(0);
-
-            if (tree[current - 'A'] == null) {
-                Node node = new Node(current);
-                tree[current - 'A'] = node;
-            }
-
-            if (leftChild != '.') {
-                Node leftNode = new Node((leftChild));
-                tree[leftChild - 'A'] = leftNode;
-                tree[current - 'A'].left = leftNode;
-            }
-
-            if (rightChild != '.') {
-                Node rightNode = new Node((rightChild));
-                tree[rightChild - 'A'] = rightNode;
-                tree[current - 'A'].right = rightNode;
-            }
-        }
-
-        result = "";
-        preorder(tree[0]);
-        sb.append(result).append("\n");
-
-        result = "";
-        inorder(tree[0]);
-        sb.append(result).append("\n");
-
-        result = "";
-        postorder(tree[0]);
-        sb.append(result).append("\n");
-
-        System.out.print(sb);
-
-    }
-
-    // 전위순회 (루트 , 왼쪽자식 , 오른쪽 자식)
-    public static void preorder(Node head) {
-        if (head == null) return;
-        result += (String.valueOf(head.value));
-        preorder(head.left);
-        preorder(head.right);
-    }
-
-    // 중위순회 (왼쪽자식 , 루트 , 오른쪽 자식)
-    public static void inorder(Node head) {
-        if (head == null) return;
-        inorder(head.left);
-        result += (String.valueOf(head.value));
-        inorder(head.right);
-    }
-
-    // 후위순회 (왼쪽자식 , 오른쪽자식 , 루트)
-    public static void postorder(Node head) {
-        if (head == null) return;
-        postorder(head.left);
-        postorder(head.right);
-        result += (String.valueOf(head.value));
-    }
 
     static class Node {
-        char value;
+        String value;
         Node left;
         Node right;
 
-        public Node(char value) {
+        public Node(String value) {
             this.value = value;
-            this.left = null;
-            this.right = null;
         }
     }
+
+    static StringBuilder sb = new StringBuilder();
+
+    public static void main(String[] args) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        Node[] map = new Node[26];
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            String cur = st.nextToken();
+            String left = st.nextToken();
+            String right = st.nextToken();
+
+            int curIndex = cur.charAt(0) - 'A';
+            int leftIndex = (left.equals(".")) ? -1 : left.charAt(0) - 'A';
+            int rightIndex = (right.equals(".")) ? -1 : right.charAt(0) - 'A';
+
+            Node parents;
+
+            if (map[curIndex] == null) {
+                parents = new Node(cur);
+                map[curIndex] = parents;
+            }
+            parents = map[curIndex];
+
+            if (leftIndex != -1 && map[leftIndex] == null) {
+                Node leftChild = new Node(left);
+                map[leftIndex] = leftChild;
+                parents.left = map[leftIndex];
+            } else if (leftIndex == -1) {
+                parents.left = new Node(".");
+            }
+
+            if (rightIndex != -1 && map[rightIndex] == null) {
+                Node rightChild = new Node(right);
+                map[rightIndex] = rightChild;
+                parents.right = map[rightIndex];
+            } else if (rightIndex == -1) {
+                parents.right = new Node(".");
+            }
+
+        }
+        preOrder(map[0]);
+        sb.append("\n");
+        innerOrder(map[0]);
+        sb.append("\n");
+        postOrder(map[0]);
+
+        System.out.print(sb);
+    }
+
+    static private void preOrder(Node cur) {
+        if (cur.value.equals(".")) {
+            return;
+        }
+
+        sb.append(cur.value);
+        preOrder(cur.left);
+        preOrder(cur.right);
+    }
+
+    static private void innerOrder(Node cur) {
+        if (cur.value.equals(".")) {
+            return;
+        }
+
+        innerOrder(cur.left);
+        sb.append(cur.value);
+        innerOrder(cur.right);
+    }
+
+    static private void postOrder(Node cur) {
+        if (cur.value.equals(".")) {
+            return;
+        }
+
+        postOrder(cur.left);
+        postOrder(cur.right);
+        sb.append(cur.value);
+
+    }
 }
+
+
