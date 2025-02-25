@@ -40,23 +40,19 @@ public class Solution {
 			min = Integer.MAX_VALUE;
 			nums = new int[N];
 			visited = new boolean[N];
-			perm(0);
+			perm(0,0);
 			sb.append("#").append(i+1).append(" ").append(min).append("\n");
 		}
 		System.out.print(sb);
 	}
 
-	private static void perm(int depth) {
-
+	private static void perm(int depth,int total) {
+		if(min < total) {
+			return;
+		}
+		
 		if (depth == N) {
-			int sum = 0;
-			sum += Math.abs(map[nums[0]][0] - cx);
-			sum += Math.abs(map[nums[0]][1] - cy);
-
-			for (int i = 0; i < N - 1; i++) {
-				sum += Math.abs(map[nums[i]][0] - map[nums[i + 1]][0]);
-				sum += Math.abs(map[nums[i]][1] - map[nums[i + 1]][1]);
-			}
+			int sum = total;
 
 			sum += Math.abs(map[nums[N - 1]][0] - hx);
 			sum += Math.abs(map[nums[N - 1]][1] - hy);
@@ -71,7 +67,11 @@ public class Solution {
 
 			visited[i] = true;
 			nums[depth] = i;
-			perm(depth + 1);
+			if(depth == 0) {
+				perm(depth + 1, total + Math.abs(map[nums[0]][0] - cx) + Math.abs(map[nums[0]][1] - cy));
+			}else {
+				perm(depth + 1,total + Math.abs(map[nums[depth]][0] - map[nums[depth - 1]][0]) + Math.abs(map[nums[depth]][1] - map[nums[depth - 1]][1]));
+			}
 			visited[i] = false;
 			nums[depth] = 0;
 		}
