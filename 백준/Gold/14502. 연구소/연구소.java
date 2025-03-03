@@ -52,7 +52,7 @@ public class Main {
         if (depth == 3) {
             copyMap = new int[N][M];
             for (int i = 0; i < N; i++) {
-                copyMap[i] = map[i].clone();
+                System.arraycopy(map[i], 0, copyMap[i], 0, M);
             }
 
             for (int i = 0; i < 3; i++) {
@@ -90,6 +90,7 @@ public class Main {
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
+
                 int[] poll = queue.poll();
                 int tr = poll[0];
                 int tc = poll[1];
@@ -104,6 +105,7 @@ public class Main {
                         copyMap[nr][nc] = 2;
                         queue.add(new int[]{nr, nc});
                         sum++;
+
                     }
                 }
             }
@@ -114,4 +116,6 @@ public class Main {
     private static boolean check(int r, int c) {
         return r >= 0 && r < N && c >= 0 && c < M;
     }
+
+
 }
