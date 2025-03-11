@@ -49,8 +49,10 @@ public class Main {
         dijkstra(start);
 
         for (int i = 1; i <= V; i++) {
-            System.out.println(distance[i] == INF ? "INF" : distance[i]);
+            sb.append(distance[i] == INF ? "INF" : distance[i]).append("\n");
         }
+        
+        System.out.print(sb);
     }
 
     private static void dijkstra(int start) {
