@@ -6,12 +6,10 @@ public class Main {
 	static class Point implements Comparable<Point> {
 		int v;
 		int w;
-		ArrayList<Integer> route;
 
 		Point(int v, int w) {
 			this.v = v;
 			this.w = w;
-			route = new ArrayList<>();
 		}
 
 		@Override
@@ -26,7 +24,7 @@ public class Main {
 	static int M;
 	static int min;
 	static int[] distance;
-	static ArrayList<Integer> minRoute;
+	static int[] minRoute;
 
 	public static void main(String[] args) throws Exception {
 
@@ -55,14 +53,28 @@ public class Main {
 
 		distance = new int[N + 1];
 		min = Integer.MAX_VALUE;
+		minRoute = new int[N+1]; 
 		dijkstra(start, end);
 
+		
+		ArrayDeque<Integer> stack  = new ArrayDeque<>();
+		stack.addFirst(end);
+		int idx = end;
+		while(true) {
+			int next = minRoute[idx];
+			stack.addFirst(next);
+			if(next == start)
+				break;
+			idx = next;
+		}
 		StringBuilder sb = new StringBuilder();
 		sb.append(distance[end]).append("\n");
-		sb.append(minRoute.size()).append("\n");
-		for (int no : minRoute) {
-			sb.append(no).append(" ");
+		sb.append(stack.size()).append("\n");
+		
+		for(int nodes : stack) {
+			sb.append(nodes).append(" ");
 		}
+		
 		System.out.println(sb);
 	}
 
@@ -71,9 +83,7 @@ public class Main {
 		distance[start] = 0;
 		PriorityQueue<Point> pq = new PriorityQueue();
 		
-		Point startNode = new Point(start, 0);
-		startNode.route.add(start);
-		pq.add(startNode);
+		pq.add(new Point(start, 0));
 
 		while (!pq.isEmpty()) {
 			Point cur = pq.poll();
@@ -86,14 +96,9 @@ public class Main {
 
 				if (distance[next.v] > distance[cur.v] + next.w) {
 					distance[next.v] = distance[cur.v] + next.w;
-					Point nextNode = new Point(next.v, distance[next.v]);
-					nextNode.route.addAll(cur.route);
-					nextNode.route.add(next.v);
 					
-					if(next.v == end) {
-						minRoute = nextNode.route;
-					}
-					pq.add(nextNode);
+					minRoute[next.v] = cur.v;
+					pq.add(new Point(next.v, distance[next.v]));
 				}
 			}
 		}
