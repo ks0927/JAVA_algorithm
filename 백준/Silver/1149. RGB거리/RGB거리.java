@@ -3,47 +3,45 @@ import java.util.*;
 
 public class Main {
 
-    public static final int RED = 0;
-    public static final int GREEN = 1;
-    public static final int BLUE = 2;
+    static int N;
+    static int[][] map;
+    static int[][] dp;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
-        int N = Integer.parseInt(br.readLine());
+        N = Integer.parseInt(br.readLine());
 
-        int[][] color = new int[N][3];
+        map = new int[N][3];
+        dp = new int[N][3];
 
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < 3; j++) {
-                color[i][j] = Integer.parseInt(st.nextToken());
-            }
+
+            int r = Integer.parseInt(st.nextToken());
+            int g = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+
+            map[i][0] = r;
+            map[i][1] = g;
+            map[i][2] = v;
         }
 
-        int[][] dp = new int[N][3];
-
-        dp[0][RED] = color[0][RED];
-        dp[0][GREEN] = color[0][GREEN];
-        dp[0][BLUE] = color[0][BLUE];
-
+        dp[0][0] = map[0][0];
+        dp[0][1] = map[0][1];
+        dp[0][2] = map[0][2];
         for (int i = 1; i < N; i++) {
-            dp[i][RED] = Math.min(dp[i - 1][BLUE], dp[i - 1][GREEN]) + color[i][RED];
-            dp[i][GREEN] = Math.min(dp[i - 1][BLUE], dp[i - 1][RED]) + color[i][GREEN];
-            dp[i][BLUE] = Math.min(dp[i - 1][RED], dp[i - 1][GREEN]) + color[i][BLUE];
+            dp[i][0] = Math.min(dp[i-1][1],dp[i-1][2]) + map[i][0];
+            dp[i][1] = Math.min(dp[i-1][0],dp[i-1][2]) + map[i][1];
+            dp[i][2] = Math.min(dp[i-1][0],dp[i-1][1]) + map[i][2];
         }
 
-        int result = Integer.MAX_VALUE;
-        if(result > dp[N - 1][RED])
-            result = dp[N - 1][RED];
-
-        if(result > dp[N - 1][GREEN])
-            result = dp[N - 1][GREEN];
-
-        if(result > dp[N - 1][BLUE])
-            result = dp[N - 1][BLUE];
-
-        System.out.println(result);
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < 3; i++) {
+            min = Math.min(min,dp[N-1][i]);
+        }
+        System.out.println(min);
     }
+
+
 }
