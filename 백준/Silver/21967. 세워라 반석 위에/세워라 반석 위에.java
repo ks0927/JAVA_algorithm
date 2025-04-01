@@ -2,32 +2,52 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
+	static int[] counts;
 
-        int[] arr = new int[N];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
 
-        int left = 0, result = 0;
-        TreeMap<Integer, Integer> countMap = new TreeMap<>();
+		int[] arr = new int[N];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < N; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
 
-        for (int right = 0; right < N; right++) {
-            countMap.put(arr[right], countMap.getOrDefault(arr[right], 0) + 1);
+		counts = new int[11];
 
-            while (countMap.lastKey() - countMap.firstKey() > 2) {
-                if (countMap.put(arr[left], countMap.get(arr[left]) - 1) == 1) {
-                    countMap.remove(arr[left]);
-                }
-                left++;
-            }
+		int right = 0;
+		int left = 0;
+		int result = 0;
+		while (right < N) {
+			counts[arr[right++]]++;
 
-            result = Math.max(result, right - left + 1);
-        }
+			int[] minMax = findMinMax();
+			int dist = minMax[1] - minMax[0];
+			
+			while(dist > 2) {
+				counts[arr[left++]]--;
+				minMax = findMinMax();
+				dist = minMax[1] - minMax[0];
+			}
+			
+			result = Math.max(result, right - left);
+		}
 
-        System.out.println(result);
-    }
+		System.out.println(result);
+	}
+
+	private static int[] findMinMax() {
+		int min = 11;
+		int max = 0;
+
+		for (int i = 1; i <= 10; i++) {
+			if (counts[i] != 0) {
+				min = Math.min(min, i);
+				max = Math.max(max, i);
+			}
+
+		}
+		return new int[] { min, max };
+	}
 }
