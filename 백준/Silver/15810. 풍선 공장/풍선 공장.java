@@ -19,13 +19,13 @@ public class Main {
 			ball[i] = Integer.parseInt(st.nextToken());
 		}
 
-		Long left = 0L;
-		Long right = 1000000000000L;
-		Long mid;
+		long left = 0L;
+		long right = 1000000000000L;
+		long mid;
 		while (left < right) {
 			mid = (left + right) / 2;
 
-			Long sum = 0L;
+			long sum = 0L;
 			for (int i = 0; i < N; i++) {
 				sum += mid / ball[i];
 			}
