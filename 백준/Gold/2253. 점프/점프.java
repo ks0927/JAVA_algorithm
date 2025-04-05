@@ -7,7 +7,7 @@ public class Main {
     static int[][] dp;
     static HashMap<Integer, Integer> checkRemove;
     static final int INF = 1000001;
-    static final int MAXSPEED = 200;
+    static final int MAXSPEED = 142;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
