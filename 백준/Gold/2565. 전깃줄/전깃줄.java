@@ -12,7 +12,7 @@ public class Main {
 		N = Integer.parseInt(br.readLine());
 
 		map = new int[501];
-		int size = 0;
+		int limit = 0;
 		for (int i = 0; i < N; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -20,30 +20,24 @@ public class Main {
 			int e = Integer.parseInt(st.nextToken());
 
 			map[s] = e;
-			size = Math.max(size, s);
+			limit = Math.max(limit, s);
 		}
 
-		int[] dp = new int[size + 1];
+		int[] dp = new int[limit + 1];
 		
 		int result = 0;
-		for (int i = 1; i <= size ; i++) {
+		int size = 1;
+		for (int i = 1; i <= limit ; i++) {
 			if(map[i] == 0) continue;
 			
-			dp[i] = 1;
+			int temp = Arrays.binarySearch(dp, 1,size,map[i]);
 			
-			int max = 0;
-			for (int j = 1; j < i; j++) {
-				if(map[j] < map[i]) {
-					max = Math.max(max, dp[j]);
-				}
-			}
+			int pos = Math.abs(temp) - 1;
+			dp[pos] = map[i];
+			if(pos == size) ++size;
 			
-			dp[i] = max + 1;
-			
-			result = Math.max(result, dp[i]);
 		}
-		
-		System.out.println(N - result);
+		System.out.println(N - size + 1);
 	}
 
 }
