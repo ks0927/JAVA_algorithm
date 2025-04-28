@@ -6,19 +6,13 @@ public class Main {
 	static int[] times;
 	static int[] cnts;
 	
-	static class Point implements Comparable<Point> {
+	static class Point {
 		int index;
 		int time;
 		public Point(int index, int time) {
 			this.index = index;
 			this.time = time;
 		}
-		
-		@Override
-		public int compareTo(Point o) {
-			return Integer.compare(this.time, o.time);
-		}
-		
 	}
 	
 	public static void main(String[] args) throws Exception{
@@ -32,7 +26,7 @@ public class Main {
 		cnts = new int[100001];
 		
 		Arrays.fill(times, 100001);
-		PriorityQueue<Point> pq = new PriorityQueue<>();
+		Queue<Point> pq = new ArrayDeque<>();
 		pq.add(new Point(N, 0));
 		times[N] = 0;
 		cnts[N] = 1;
