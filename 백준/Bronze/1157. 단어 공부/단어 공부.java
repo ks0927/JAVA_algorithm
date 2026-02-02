@@ -9,36 +9,33 @@ class Main {
         String str = br.readLine().toUpperCase();
         
         int[] map = new int[26];
+        int max = 0;
         
         for(int i=0; i < str.length(); i++) {
             int cur = str.charAt(i) - 'A';
             map[cur]+=1;
-        }
-        
-        int max = 0;
-        
-        for(int i=0; i < 26; i++) {
-            if(map[i] > max) {
-                max = map[i];
+            if(max < map[cur]) {
+                max = map[cur];
             }
-        }
+        }       
         
         int cnt = 0;
-        int idx = -1;
+        char result = '?';
+        
         for(int i = 0; i < 26; i++) {
             if(map[i] == max) {
-                cnt++;
-                idx = i;
-            }
-            
-            if(cnt >= 2) {
-                System.out.println("?");
-                return;
+                
+                // 이미 발견한 중복이라면
+                if(result != '?') {
+                    result = '?';
+                    break;
+                }
+                
+                result = (char)('A' + i);
             }
         }
-        
-        int result = 'A' + idx;
-        System.out.printf("%c",result);
+
+        System.out.println(result);
 
     }
 }
