@@ -1,46 +1,35 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-
-    public static void main(String[] args) throws IOException {
+class Main {
+    public static void main(String[] args) throws Exception{
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuilder sb = new StringBuilder();
+        
+        
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-
-        int[] map = new int[N + 1];
-        Long[] dp = new Long[N + 1];
-
+        
+        int[] arr = new int[N+1];
+        
         st = new StringTokenizer(br.readLine());
-
-        Long dpValue = 0L;
-        for (int i = 1; i <= N; i++) {
-            int value = Integer.parseInt(st.nextToken());
-            map[i] = value;
-            dpValue += value;
-            dp[i] = dpValue;
+        arr[1] = Integer.parseInt(st.nextToken());
+        
+        for(int i=2; i <= N; i++) {
+            int cur = Integer.parseInt(st.nextToken());
+            arr[i] = arr[i-1] + cur;
         }
-
-
-        for (int i = 0; i < M; i++) {
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-
-            if (start == 1) {
-                sb.append(dp[end]).append("\n");
-            } else {
-                Long result = dp[end] - dp[start - 1];
-                sb.append(result).append("\n");
-            }
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            
+            sb.append(arr[e]-arr[s-1]).append("\n");
         }
-
-        System.out.println(sb);
+        
+        System.out.print(sb);
     }
-
-
 }
-
