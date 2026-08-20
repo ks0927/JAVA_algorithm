@@ -11,9 +11,6 @@ class Solution {
             }
         }
         
-        System.out.println("zcnt:"+zcnt);
-        System.out.println("cnt:"+cnt);
-        
         int[] answer = {rank[zcnt+cnt],rank[cnt]};
         return answer;
     }
