@@ -1,39 +1,37 @@
 import java.util.*;
-
 class Solution {
     public int solution(String skill, String[] skill_trees) {
-
-        Map<String, Integer> skillBook = new HashMap<>();
-
-        int I = 1;
-        for(char singleSkill : skill.toCharArray()) {
-            String s = String.valueOf(singleSkill);
-            skillBook.put(s,I);
-            I++;
-        }
-
         int answer = 0;
-
-        for (String skillTree : skill_trees) {
-            int checkFlag  = 1;
-            boolean correct = true;
-            for (char checkSkill : skillTree.toCharArray()) {
-                String s = String.valueOf(checkSkill);
-
-                if(skillBook.containsKey(s)) {
-                    if(skillBook.get(s) == checkFlag) {
-                        checkFlag++;
-                    }else {
-                        correct = false;
+        
+        Map<Character,Integer> map = new HashMap<>();
+        
+        int idx =1;
+        for(char cur : skill.toCharArray()) {
+            map.put(cur,idx++);
+        }
+        
+        for(String str : skill_trees) {
+            int check = 1;
+            boolean flag = false;
+            
+            for(int i=0; i < str.length(); i++) {
+                
+                char now = str.charAt(i);
+                if(map.containsKey(now)) {
+                    if(map.get(now) == check) {
+                        check++;
+                    }else{
+                        flag = true;
                         break;
                     }
                 }
+  
             }
-            if(correct) {
-                answer++;
-            }
+            
+            if(!flag) answer++; 
+            
         }
-
+        
         return answer;
     }
 }
